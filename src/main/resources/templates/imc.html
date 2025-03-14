@@ -14,18 +14,20 @@
         CALCULADORA IMC
     </div>
     <div class="card-body">
-        <!-- -->
+        <!-- th:action = (se usa @) resuelve una ruta definida en el controlador
+             th:object = (se usa $)mapea un objeto enviado desde el contralador  -->
         <form th:action="@{/calcularimc}" method="post"
                 th:object="${imcmodel}">
             <div class="mb-3">
                 <label for="txttalla" class="form-label">Ingrese su Talla:</label>
-                <input type="number" class="form-control" id="txttalla" placeholder="name@example.com">
+                <input type="number" th:field="*{talla}" class="form-control" id="txttalla" placeholder="name@example.com">
             </div>
             <div class="mb-3">
                 <label for="txtpeso" class="form-label">Ingrese su peso:</label>
-                <input type="number" class="form-control" id="txtpeso" placeholder="name@example.com">
+                <input type="number" th:field="*{peso}" class="form-control" id="txtpeso" placeholder="name@example.com">
             </div>
-            <button type="button" class="btn btn-primary">CALCULAR</button>
+            <button type="submit"
+                    class="btn btn-primary">CALCULAR</button>
         </form>
     </div>
 </div>
