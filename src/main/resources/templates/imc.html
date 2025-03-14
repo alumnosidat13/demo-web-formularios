@@ -29,7 +29,9 @@
             <button type="submit"
                     class="btn btn-primary">CALCULAR</button>
         </form>
-        <div class="alert alert-primary" role="alert">
+        <div th:if="${visualizaralerta}"
+             class="alert" th:classappend="${estilodiagnostico}"
+             role="alert">
             <span th:text="${resultado} ?: ''"></span>
         </div>
     </div>
