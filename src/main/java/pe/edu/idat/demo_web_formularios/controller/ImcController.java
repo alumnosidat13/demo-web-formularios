@@ -13,6 +13,8 @@ public class ImcController {
     public String formularioImc(Model model){
         model.addAttribute("imcmodel",
                 new ImcModel());
+        model.addAttribute("visualizaralerta",
+                false);
         return "imc";
     }
 
@@ -23,12 +25,16 @@ public class ImcController {
         Double tallam = imc.getTalla() / 100;
         Double valorImc = imc.getPeso() / (tallam * tallam);
         String diagnostico = "";
+        String estiloDiagnostico = "alert-danger";
         if(valorImc <= 18.5){
             diagnostico = "Por debajo del peso.";
+            estiloDiagnostico = "alert-dark";
         } else if(valorImc <= 25){
             diagnostico = "con peso normal";
+            estiloDiagnostico = "alert-primary";
         } else if(valorImc <= 30){
             diagnostico = "con sobrepeso";
+            estiloDiagnostico = "alert-warning";
         } else if(valorImc <= 36){
             diagnostico = "obesidad leve";
         } else if(valorImc <= 39){
@@ -37,8 +43,13 @@ public class ImcController {
             diagnostico = "obesidad mórbida";
         }
         model.addAttribute("resultado",
-                "Su valor IMC = " + valorImc +
+                "Su valor IMC = " +
+                        String.format("%.2f", valorImc)  +
                 ", usted se encuentra: " +diagnostico);
+        model.addAttribute("visualizaralerta",
+                true);
+        model.addAttribute("estilodiagnostico",
+                estiloDiagnostico);
         return "imc";
     }
 
